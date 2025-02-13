@@ -1,0 +1,67 @@
+{
+    "models": {
+        "gpt-4o": {
+            "context_window": 16000,
+            "max_output_tokens": 8000,
+            "min_output_tokens": 1000
+        },
+        "gpt-4o-mini": {
+            "context_window": 8000,
+            "max_output_tokens": 4000,
+            "min_output_tokens": 500
+        },
+        "o1-preview": {
+            "context_window": 32000,
+            "max_output_tokens": 16000,
+            "min_output_tokens": 2000
+        }
+    },
+    "summaries": {
+        "initial_summary": {
+            "success": "This is a detailed initial summary that preserves key information from the source text. It includes important numbers, quotes, and insights while maintaining a clear and focused narrative structure. The summary highlights the most relevant points while removing redundant information.",
+            "empty": "",
+            "error": null
+        },
+        "consolidate_chunks": {
+            "success": "This is a consolidated summary that effectively combines multiple chunks of text. It maintains a coherent narrative flow while preserving the most important insights and data points from each chunk. The summary ensures that key information is not lost during the consolidation process.",
+            "empty": "",
+            "error": null
+        },
+        "final_analysis": {
+            "success": "This is a comprehensive final analysis that presents the information in a professional and structured format. It maintains a single coherent narrative while preserving key insights and data points. The analysis ensures clear organization and maintains a professional tone throughout.",
+            "empty": "",
+            "error": null
+        }
+    },
+    "test_cases": {
+        "large_text": {
+            "input": "This is a very large text that needs to be processed in chunks. It contains multiple paragraphs of information that need to be summarized effectively. The text includes important financial metrics, market analysis, and strategic insights that should be preserved in the final summary. Key metrics include revenue growth of 15%, profit margins of 25%, and market share increase of 10%. The analysis suggests positive trends in all major categories, with particularly strong performance in emerging markets.",
+            "expected_chunks": 3,
+            "expected_summary": "Summary preserving key metrics: 15% revenue growth, 25% profit margins, 10% market share increase. Shows positive trends, especially in emerging markets."
+        },
+        "empty_text": {
+            "input": "",
+            "expected_error": "Empty text provided"
+        },
+        "invalid_model": {
+            "model": "invalid-model",
+            "expected_error": "Unknown model: invalid-model"
+        },
+        "token_limit": {
+            "input": "This text exceeds the token limit and should trigger an error.",
+            "max_tokens": 5,
+            "expected_error": "Token limit exceeded"
+        }
+    },
+    "validation_cases": {
+        "valid_text": {
+            "input": "This is a valid text with proper structure and content.",
+            "expected": true
+        },
+        "invalid_text": {
+            "input": "   ",
+            "expected": false,
+            "error": "Text is empty or contains only whitespace"
+        }
+    }
+}

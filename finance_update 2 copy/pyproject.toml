@@ -1,0 +1,95 @@
+[tool.poetry]
+name = "finance_update"
+version = "0.1.0"
+description = "Financial report processing and analysis pipeline"
+authors = ["Your Name <your.email@example.com>"]
+packages = [
+    { include = "**/*.py" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+setuptools = "^69.0.3"
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.1"
+pytest-cov = "^4.1.0"
+coverage = "^7.3.0"
+reportlab = "^4.0.4"
+nltk = "^3.8.1"
+openai = "^0.27.8"
+dropbox = "^11.36.2"
+aiohttp = "^3.8.5"
+pydantic = "^2.1.1"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.dev-dependencies]
+black = "^23.7.0"
+isort = "^5.12.0"
+mypy = "^1.5.0"
+pylint = "^2.17.5"
+pytest-xdist = "^3.3.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = """
+    --cov=services
+    --cov=utils
+    --cov=clients
+    --cov-report=term-missing
+    --cov-report=html
+    --cov-report=xml
+    --cov-fail-under=90
+    -v
+"""
+markers = [
+    "integration: mark test as integration test",
+    "slow: mark test as slow running"
+]
+
+[tool.coverage.run]
+branch = true
+source = ["services", "utils", "clients"]
+omit = [
+    "tests/*",
+    "**/__init__.py",
+    "**/conftest.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError"
+]
+fail_under = 90
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "coverage_html"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
